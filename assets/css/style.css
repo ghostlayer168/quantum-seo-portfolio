@@ -25,6 +25,12 @@ body {
   width: 100%;
   max-width: 100%;
   position: relative;
+  hanging-punctuation: first last;
+}
+
+p, h1, h2, h3, h4, .hero-description, .section-description {
+  text-wrap: pretty;
+  hanging-punctuation: first last;
 }
 
 ::-webkit-scrollbar {
@@ -136,7 +142,7 @@ body {
   padding: 0 clamp(15px, 4vw, 40px);
   pointer-events: auto;
   width: 100%;
-  overflow-x: hidden;
+  overflow: visible;
 }
 
 header {
@@ -322,13 +328,14 @@ header {
   position: relative;
   padding: clamp(20px, 5vh, 40px) 0;
   width: 100%;
-  overflow-x: hidden;
+  overflow: visible;
 }
 
 .hero-content {
   max-width: min(1000px, 100%);
   width: 100%;
-  overflow-x: hidden;
+  overflow: visible;
+  padding: 20px 0;
 }
 
 .quantum-badge {
@@ -369,9 +376,11 @@ h1 {
   letter-spacing: -0.02em;
   margin-bottom: clamp(15px, 3vh, 30px);
   text-transform: uppercase;
-  word-break: break-word;
   max-width: 100%;
-  
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .quantum-text {
@@ -385,8 +394,13 @@ h1 {
     clamp(1px, 0.3vw, 3px) clamp(1px, 0.3vw, 3px) 0 #ff3300,
     clamp(-1px, -0.3vw, -3px) clamp(-1px, -0.3vw, -3px) 0 #ffaa00;
   animation: quantumGlitch 3s infinite;
-  padding: 0.2em 0.2em;
-  margin: 0 -0.1em;
+  max-width: 100%;
+  z-index: 5;
+  margin-right: 30px;
+  white-space: nowrap; 
+  overflow-wrap: normal;
+  word-break: keep-all; 
+  word-wrap: normal;
 }
 
 @keyframes quantumGlitch {
@@ -401,9 +415,12 @@ h1 {
   -webkit-text-fill-color: transparent;
   background-size: 400% 400%;
   animation: gradientQuantum 10s ease infinite;
-  word-break: break-word;
+  display: inline-block; 
+  white-space: nowrap; 
+  overflow-wrap: normal;
+  word-break: keep-all;
+  word-wrap: normal;
 }
-
 @keyframes gradientQuantum {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -562,20 +579,29 @@ h1 {
 .section {
   margin: clamp(40px, 10vh, 140px) 0;
   width: 100%;
-  overflow-x: hidden;
+  overflow: visible;
 }
 
 .section-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
   margin-bottom: clamp(20px, 5vh, 60px);
   width: 100%;
+}
+
+.section-header .quantum-badge {
+  margin-bottom: 0;
 }
 
 .section-header h2 {
   font-size: clamp(1.8rem, 6vw, 4rem);
   font-weight: 800;
-  margin-bottom: clamp(10px, 2vh, 20px);
   line-height: 1.2;
   word-break: break-word;
+  width: 100%;
+  margin-bottom: 0;
 }
 
 .section-description {
@@ -584,6 +610,7 @@ h1 {
   max-width: min(800px, 100%);
   line-height: 1.7;
   word-wrap: break-word;
+  margin-top: 10px;
 }
 
 .services-quantum {
@@ -1455,6 +1482,7 @@ footer {
   
   .quantum-text {
     -webkit-text-stroke: 1px rgba(255,100,0,0.6);
+    margin-right: 20px;
   }
   
   .services-quantum,
@@ -1507,6 +1535,15 @@ footer {
   .btn-group {
     flex-direction: column;
     width: 100%;
+  }
+  
+  .section-header {
+    gap: 8px;
+  }
+  
+  .quantum-badge {
+    white-space: normal;
+    word-break: break-word;
   }
 }
 
@@ -1595,6 +1632,10 @@ footer {
     width: 40px;
     height: 40px;
     font-size: 18px;
+  }
+  
+  .quantum-text {
+    margin-right: 15px;
   }
 }
 
